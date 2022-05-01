@@ -13,7 +13,7 @@ use Inertia\Inertia;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -32,4 +32,22 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
+    Route::prefix('parametros')->group(function () {
+        Route::name('parametros.')->group(function () {
+            Route::get('/', [ParametrosController::class, 'index'])->name('dashboard');
+            Route::post('/adicionar', [ParametrosController::class, 'store'])->name('store');
+            Route::post('/editar/{uuid}', [ParametrosController::class, 'update'])->name('update');
+            Route::post('/apagar/{uuid}', [ParametrosController::class, 'destroy'])->name('destroy');
+        });
+    });
+
+    Route::prefix('empresas')->group(function () {
+        Route::name('empresas.')->group(function () {
+            Route::get('/', [EmpresasController::class, 'index'])->name('dashboard');
+            Route::post('/adicionar', [EmpresasController::class, 'store'])->name('store');
+            Route::post('/editar/{uuid}', [EmpresasController::class, 'update'])->name('update');
+            Route::post('/apagar/{uuid}', [EmpresasController::class, 'destroy'])->name('destroy');
+        });
+    });
+
 });
