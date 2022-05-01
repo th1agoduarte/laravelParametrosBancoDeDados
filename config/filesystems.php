@@ -1,5 +1,7 @@
 <?php
 
+use App\Services\Conf\ParametrosService;
+
 return [
 
     /*
@@ -13,7 +15,7 @@ return [
     |
     */
 
-    'default' => env('FILESYSTEM_DISK', 'local'),
+    'default' => ParametrosService::getConfigIncial('FILESYSTEM_DRIVER'),/*  env('FILESYSTEM_DRIVER', 'local'), */
 
     /*
     |--------------------------------------------------------------------------
@@ -39,20 +41,20 @@ return [
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'url' => ParametrosService::getConfigIncial('APP_URL').'/storage',/* env('APP_URL').'/storage', */
             'visibility' => 'public',
             'throw' => false,
         ],
 
         's3' => [
             'driver' => 's3',
-            'key' => env('AWS_ACCESS_KEY_ID'),
-            'secret' => env('AWS_SECRET_ACCESS_KEY'),
-            'region' => env('AWS_DEFAULT_REGION'),
-            'bucket' => env('AWS_BUCKET'),
-            'url' => env('AWS_URL'),
-            'endpoint' => env('AWS_ENDPOINT'),
-            'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
+            'key' => ParametrosService::getConfigIncial('AWS_ACCESS_KEY_ID'),/* env('AWS_ACCESS_KEY_ID'), */
+            'secret' => ParametrosService::getConfigIncial('AWS_SECRET_ACCESS_KEY'),/* env('AWS_SECRET_ACCESS_KEY'), */
+            'region' => ParametrosService::getConfigIncial('AWS_DEFAULT_REGION'),/* env('AWS_DEFAULT_REGION'), */
+            'bucket' => ParametrosService::getConfigIncial('AWS_BUCKET'),/* env('AWS_BUCKET'), */
+            'url' => ParametrosService::getConfigIncial('AWS_URL'),/* env('AWS_URL'), */
+            'endpoint' => ParametrosService::getConfigIncial('AWS_ENDPOINT'),/* env('AWS_ENDPOINT'), */
+            'use_path_style_endpoint' => ParametrosService::getConfigIncial('AWS_USE_PATH_STYLE_ENDPOINT'),/* env('AWS_USE_PATH_STYLE_ENDPOINT', false), */
             'throw' => false,
         ],
 

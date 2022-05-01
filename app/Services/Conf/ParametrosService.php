@@ -64,7 +64,7 @@ class ParametrosService
         return parametros::where(['parametro' => $parametro, 'idempresa' => $idempresa])->firstOrFail();
     }
 
-    public static function getConfigInciial($parametro)
+    public static function getConfigIncial($parametro)
     {
         $sql = "select parametro,valor from parametros where idempresa is null and parametro = ? limit 1";
         if (!$p_sql = ConexaoService::getInstance()->prepare($sql)) {

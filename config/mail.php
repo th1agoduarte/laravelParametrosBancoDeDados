@@ -1,5 +1,7 @@
 <?php
 
+use App\Services\Conf\ParametrosService;
+
 return [
 
     /*
@@ -13,7 +15,7 @@ return [
     |
     */
 
-    'default' => env('MAIL_MAILER', 'smtp'),
+    'default' => ParametrosService::getConfigIncial('MAIL_MAILER'), /* env('MAIL_MAILER', 'smtp'), */
 
     /*
     |--------------------------------------------------------------------------
@@ -36,11 +38,11 @@ return [
     'mailers' => [
         'smtp' => [
             'transport' => 'smtp',
-            'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
-            'port' => env('MAIL_PORT', 587),
-            'encryption' => env('MAIL_ENCRYPTION', 'tls'),
-            'username' => env('MAIL_USERNAME'),
-            'password' => env('MAIL_PASSWORD'),
+            'host' => ParametrosService::getConfigIncial('MAIL_HOST'),/* env('MAIL_HOST', 'smtp.mailgun.org'), */
+            'port' => ParametrosService::getConfigIncial('MAIL_PORT'),/* env('MAIL_PORT', 587), */
+            'encryption' => ParametrosService::getConfigIncial('MAIL_ENCRYPTION'),/* env('MAIL_ENCRYPTION', 'tls'), */
+            'username' => ParametrosService::getConfigIncial('MAIL_USERNAME'),/* env('MAIL_USERNAME'), */
+            'password' => ParametrosService::getConfigIncial('MAIL_PASSWORD'),/* env('MAIL_PASSWORD'), */
             'timeout' => null,
         ],
 
@@ -91,8 +93,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => ParametrosService::getConfigIncial('MAIL_FROM_ADDRESS'),
+        'name' => ParametrosService::getConfigIncial('MAIL_FROM_NAME'),
     ],
 
     /*

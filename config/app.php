@@ -1,5 +1,6 @@
 <?php
 
+use App\Services\Conf\ParametrosService;
 use Illuminate\Support\Facades\Facade;
 
 return [
@@ -15,7 +16,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => ParametrosService::getConfigIncial('APP_NAME'), /* env('APP_NAME', 'Laravel'), */
 
     /*
     |--------------------------------------------------------------------------
@@ -28,7 +29,7 @@ return [
     |
     */
 
-    'env' => env('APP_ENV', 'production'),
+    'env' => ParametrosService::getConfigIncial('APP_ENV'), /* env('APP_ENV', 'production'), */
 
     /*
     |--------------------------------------------------------------------------
@@ -41,7 +42,7 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', false),
+    'debug' => ParametrosService::getConfigIncial('APP_DEBUG') == 'S' ? true : false, /* ParametrosService::getConfigInciial('APP_DEBUG')=='S'?true:false /* env('APP_DEBUG', false), */
 
     /*
     |--------------------------------------------------------------------------
@@ -54,7 +55,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => ParametrosService::getConfigIncial('APP_URL'), /*  env('APP_URL', 'http://localhost'), */
 
     'asset_url' => env('ASSET_URL'),
 
@@ -69,7 +70,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => ParametrosService::getConfigIncial('timezone'), /* 'America/Sao_Paulo', */
 
     /*
     |--------------------------------------------------------------------------
@@ -82,7 +83,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => ParametrosService::getConfigIncial('locale'), /* 'pt-BR', */
 
     /*
     |--------------------------------------------------------------------------

@@ -1,5 +1,7 @@
 <?php
 
+use App\Services\Conf\ParametrosService;
+
 return [
 
     /*
@@ -14,7 +16,7 @@ return [
      |
      */
 
-    'enabled' => env('DEBUGBAR_ENABLED', null),
+    'enabled' => ParametrosService::getConfigIncial('DEBUGBAR_ENABLED') == 'S' ? true : false, //env('DEBUGBAR_ENABLED', null),
     'except' => [
         'telescope*',
         'horizon*',
