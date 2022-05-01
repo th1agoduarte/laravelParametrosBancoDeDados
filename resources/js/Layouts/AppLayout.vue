@@ -27,7 +27,7 @@ const logout = () => {
     Inertia.post(route('logout'));
 };
 </script>
-
+<style lang="scss" src="@/Assets/Styles/App.scss" />
 <template>
     <div>
         <Head :title="title" />
