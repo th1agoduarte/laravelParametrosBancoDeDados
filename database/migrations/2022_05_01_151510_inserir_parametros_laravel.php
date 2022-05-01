@@ -16,10 +16,10 @@ return new class extends Migration
     {
         DB::transaction(function () {
             DB::statement("INSERT INTO `parametros` VALUES
-                            (1,'2109001e-a389-44aa-b1ce-4ec79e281a5e',NULL,'APP_NAME','Nome do Aplicativo','UPA','Configurações APP - Nome do Aplicativo','2022-01-12 03:16:04','2022-01-15 17:28:49'),
+                            (1,'2109001e-a389-44aa-b1ce-4ec79e281a5e',NULL,'APP_NAME','Nome do Aplicativo','','Configurações APP - Nome do Aplicativo','2022-01-12 03:16:04','2022-01-15 17:28:49'),
                             (2,'3c6ccc37-aebe-4013-9b6f-1dfd8b2ed257',NULL,'APP_ENV','Local do APP','local','Configurações APP','2022-01-12 03:16:04','2022-01-12 03:16:04'),
                             (3,'6a95a55c-88b7-4d1b-9487-bc93e9aa1968',NULL,'APP_DEBUG','Habilitar debug','S','Configurações APP','2022-01-12 03:16:04','2022-01-12 03:16:04'),
-                            (4,'61aa82cf-3e60-4edc-8a3e-fa57f57bbc46',NULL,'APP_URL','URL App','https://www.upa.local','Configurações APP','2022-01-12 03:16:04','2022-01-12 03:16:04'),
+                            (4,'61aa82cf-3e60-4edc-8a3e-fa57f57bbc46',NULL,'APP_URL','URL App','https://localhost','Configurações APP','2022-01-12 03:16:04','2022-01-12 03:16:04'),
                             (5,'aaab009a-6e47-40e0-8452-5b1250df5f5f',NULL,'locale','Localização APP','pt-BR','Configurações APP','2022-01-12 03:16:04','2022-01-12 03:16:04'),
                             (6,'ebc2bd7a-ef43-4ef0-b346-c80b42961ba2',NULL,'timezone','Timezone APP','America/Sao_Paulo','Configurações APP','2022-01-12 03:16:04','2022-01-12 03:16:04'),
                             (7,'ae8d06c8-faf3-4a64-8a12-32570f3331ed',NULL,'FILESYSTEM_DRIVER','Driver padrão de armazenamento','local','Configurações Filesystem','2022-01-12 03:16:04','2022-01-12 03:16:04'),
