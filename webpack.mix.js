@@ -16,10 +16,11 @@ mix.js('resources/js/app.js', 'public/js').vue()
         require('postcss-import'),
         require('tailwindcss'),
     ])
-    .alias({
-        '@': 'resources/js',
-    });
+    .webpackConfig(require('./webpack.config'))
+ .vue({version: 3})
+ .version();
 
 if (mix.inProduction()) {
-    mix.version();
+ mix.version();
 }
+mix.browserSync('https://www.upa.local/');
