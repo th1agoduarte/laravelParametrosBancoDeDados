@@ -9,8 +9,7 @@ defineProps({
   title: String,
 });
 </script>
-<style scoped></style>
-
+<style lang="scss" src="@/Assets/Styles/App.scss" ></style>
 <template>
   <Head title="Home" />
 
@@ -42,5 +41,3 @@ defineProps({
     </div>
   </div>
 </template>
-
-

@@ -1,7 +1,8 @@
 <script setup>
 import { Head, Link } from '@inertiajs/inertia-vue3';
-
-defineProps({
+import AppLayout from '@/Layouts/AppLayout.vue';
+const name = "Home"
+const props = defineProps({
     canLogin: Boolean,
     canRegister: Boolean,
     laravelVersion: String,
@@ -9,10 +10,11 @@ defineProps({
     title: String,
 });
 </script>
-
+<style lang="scss" src="@/Assets/Styles/App.scss" ></style>
 <template>
-    <div>
-
-    </div>
+    <AppLayout :title="title">
+        #prinpcipal<br>
+        {{laravelVersion}}
+    </AppLayout>
 </template>
-<style lang="scss" src="@/Assets/Styles/App.scss" />
+

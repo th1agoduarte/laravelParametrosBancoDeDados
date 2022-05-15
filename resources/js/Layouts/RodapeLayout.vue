@@ -1,20 +1,14 @@
 <script setup>
-import { ref } from 'vue';
 import { Inertia } from '@inertiajs/inertia';
 import { Head, Link } from '@inertiajs/inertia-vue3';
 
-defineProps({
+const props = defineProps({
     title: String,
 });
-
-const logout = () => {
-    Inertia.post(route('logout'));
-};
 </script>
 <style lang="scss" src="@/Assets/Styles/App.scss" ></style>
 <template>
-    <Head :title="title" />
-    <div class="conteudo-principal">
-        <slot></slot>
+    <div>
+        {{props.title}}
     </div>
 </template>
