@@ -1,0 +1,58 @@
+@import './Cores';
+
+.botao-padrao, .link-botao-padrao{
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    min-width: 100px;
+    transition: background-color 500ms ease;
+    font-size: 12px;
+    box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.64);
+    -webkit-box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.64);
+    i{
+        min-width: 30px;
+    }
+    div{
+        margin-inline-start: 10px;
+        padding-right: 10px;
+    }
+}
+
+.botao-padrao:hover, .link-botao-padrao:hover{
+    background-color: $verdeDois;
+    color: $verdePadrao;
+}
+.verde{
+    background-color: $verdeBotoes;
+    color: $branco;
+}
+.azul{
+    background-color: $azulBotoes;
+    color: $branco;
+}
+.branco{
+    background-color: $branco;
+    color: $preto;
+}
+
+.verdeDois{
+    background-color: $verdeDois;
+}
+
+.verdeTres{
+    background-color: $verdeTres;
+}
+
+.menu-padrao{
+    background-color: black ;
+    color: aqua;
+}
+.menu-padrao:hover{
+    color: black;
+}
+
+

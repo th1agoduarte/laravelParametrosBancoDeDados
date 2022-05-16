@@ -1,0 +1,16 @@
+@import './Cores';
+.nav-topo-principal{
+    padding: 10px;
+    background-color: $cinzaDois;
+    display: flex;
+    justify-content: center;
+}
+.nav-topo{
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+#login-sysestagio{
+    margin-inline-end: 20px;
+}
+
