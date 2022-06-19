@@ -25,3 +25,17 @@
 .menu-padrao:hover{
     background-size: 100% 3px;
 }
+
+.centraliza-conteudo{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.centraliza-all{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+

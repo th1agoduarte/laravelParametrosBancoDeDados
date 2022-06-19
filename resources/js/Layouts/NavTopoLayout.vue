@@ -17,8 +17,8 @@ const definicoes = defineComponent({
     <div class="nav-topo-principal">
         <div class="conteiner nav-topo">
             <LinkBotaoPadrao id="doacoes" :link="'#'" :target="'_self'" :descricao="'Doações'" :icone="'favorite'" :classes="['verde']" />
-            <LinkBotaoPadrao id="login-sysestagio" :link="'#'" :target="'_self'" :descricao="'Faça seu Login'" :icone="'account_circle_full'" :classes="['azul']" />
-            <BotaoPadrao style="font-size: 20px; margin-inline-end: 10px;" :descricao="''" :classes="'preto'" :icone="'search'" />
+            <LinkBotaoPadrao id="login-sysestagio" :link="'#'" :target="'_self'" :descricao="'Faça seu Login'" :icone="'account_circle'" :classes="['azul']" />
+            <!-- <BotaoPadrao style="font-size: 20px; margin-inline-end: 10px;" :descricao="''" :classes="'preto'" :icone="'search'" /> -->
         </div>
     </div>
 </template>
