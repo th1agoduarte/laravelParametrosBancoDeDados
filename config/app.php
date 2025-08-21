@@ -200,7 +200,7 @@ return [
         /*
         * Providers do AWS
          */
-        Aws\Laravel\AwsServiceProvider::class,
+        //Aws\Laravel\AwsServiceProvider::class,
 
     ],
 
@@ -217,7 +217,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
-        'AWS' => Aws\Laravel\AwsFacade::class,
+        //'AWS' => Aws\Laravel\AwsFacade::class,
     ])->toArray(),
 
 ];

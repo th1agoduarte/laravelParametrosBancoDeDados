@@ -1,8 +1,8 @@
 <?php
 namespace App\Services\Conf;
 
-use App\Models\parameters;
-use App\Repository\Interfaces\ParametersRepositoryInterface;
+use App\Models\Parameters;
+use App\Repositories\Contracts\ParametersRepositoryInterface;
 use App\Services\Utils\ConnectionService;
 use Illuminate\Http\Request;
 use PDO;

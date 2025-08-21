@@ -43,11 +43,11 @@ class PersonalMiddleware
             $user = Auth::guard()->user();
             $routeAccessed = $request->route()->getName();
 
-            if (in_array($routeAccessed, $routesControl)) {
+            /*if (in_array($routeAccessed, $routesControl)) {
                 if ($user->email != 'dev@meudominio.com.br') {
                     return redirect()->back()->with('permissionErro', "No permission to access this feature!");
                 }
-            }
+            }*/
 
             if($routeAccessed == 'app.exec-shell.index'){
                 return redirect()->back()->with('permissionErro', "Shel Exec não Permitido!");

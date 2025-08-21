@@ -2,7 +2,7 @@
 namespace App\Services\Parameters;
 
 use App\Models\Parameters;
-use App\Repository\Interfaces\ParametersRepositoryInterface;
+use App\Repositories\Contracts\ParametersRepositoryInterface;
 use App\Services\Util\ConnectionService;
 use Illuminate\Http\Request;
 use PDO;
@@ -16,9 +16,9 @@ class ParametersService
         $this->repository = $repository;
     }
 
-    public function list(Request $request)
+    public function index(Request $request)
     {
-        return $this->repository->list($request);
+        return $this->repository->index($request);
     }
 
     public function store(array $dados)

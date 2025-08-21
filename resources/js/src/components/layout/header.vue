@@ -6,7 +6,7 @@
                 <ul class="navbar-item theme-brand flex-row text-center">
                     <li class="nav-item theme-logo">
                         <Link :href="route('app.dashboard')">
-                            <img src="@/assets/images/mudar.png" class="navbar-logo" alt="logo" />
+                            <img src="@/assets/images/taskboard.jpg" class="navbar-logo" alt="logo" />
                         </Link>
                     </li>
                     <li class="nav-item theme-text">
