@@ -1,0 +1,29 @@
+FROM node:20.10.0
+
+# Setting the work directory.
+WORKDIR /var/www
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    git \
+    curl \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    zip \
+    unzip
+
+# Install prerequisites required for tools and extensions installed later on.
+RUN apt-get update \
+    && apt-get install -y apt-transport-https gnupg2 libpng-dev libzip-dev unzip \
+    && rm -rf /var/lib/apt/lists/*
+
+#install yarn
+RUN curl https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+    && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
+    && apt-get update && apt-get install yarn -y
+
+
+
+
+

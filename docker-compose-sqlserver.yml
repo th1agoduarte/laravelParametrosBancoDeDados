@@ -1,0 +1,73 @@
+version: '3.8'
+services:
+    app:
+        container_name: lara-dash-app
+        build:
+            args:
+                user: lara-dash
+                uid: 1000
+            context: ./docker/app
+            dockerfile: Dockerfile.php.sqlserver
+        image: th1agoduarte/lara-dash-app-sqlserver
+        tty: true
+        working_dir: /var/www/
+        volumes:
+            - ./:/var/www
+        restart: always
+        networks:
+            - rede-lara-dash
+        depends_on:
+            - "sqlserver"
+    app-node:
+        container_name: lara-dash-app-node
+        build:
+            context: ./docker/app
+            dockerfile: Dockerfile.node
+        tty: true
+        working_dir: /var/www/
+        ports:
+            - '3000:3000'
+            - '3001:3001'
+        volumes:
+            - ./:/var/www
+        restart: always
+        networks:
+            - rede-lara-dash
+        depends_on:
+            - "app"
+    nginx:
+        container_name: lara-dash-nginx
+        image: nginx:latest
+        tty: true
+        ports:
+            - '8081:80'
+            - '443:443'
+        volumes:
+            - ./:/var/www
+            - ./docker/nginx/:/etc/nginx/conf.d/
+        restart: always
+        networks:
+            - rede-lara-dash
+        depends_on:
+            - "app"
+    sqlserver:
+        container_name: lara-dash-sqlserver
+        user: root
+        image: mcr.microsoft.com/mssql/server
+        environment:
+            SA_PASSWORD: "SqlServer2019!"
+            ACCEPT_EULA: "Y"
+            MSSQL_PID: "Developer"
+            TZ: "America/Sao_Paulo"
+        tty: true
+        ports:
+            - "1433:1433"
+        restart: always
+        volumes:
+            - ./docker/sqlserver/data/:/var/opt/mssql/data/
+        networks:
+            - rede-lara-dash
+networks:
+    rede-lara-dash:
+        driver: bridge
+

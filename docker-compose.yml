@@ -1,0 +1,92 @@
+services:
+    app:
+        container_name: lara-dash-app
+        build:
+            args:
+                user: lara-dash
+                uid: 1000
+            context: ./docker/app
+            dockerfile: Dockerfile.php
+        tty: true
+        working_dir: /var/www/
+        volumes:
+            - ./:/var/www
+        restart: always
+        networks:
+            - rede-lara-dash
+    app-node:
+        container_name: lara-dash-app-node
+        build:
+            context: ./docker/app
+            dockerfile: Dockerfile.node
+        tty: true
+        working_dir: /var/www/
+        volumes:
+            - ./:/var/www
+        restart: always
+        networks:
+            - rede-lara-dash
+        depends_on:
+            - "app"
+    nginx:
+        container_name: lara-dash-nginx
+        image: nginx:latest
+        tty: true
+        ports:
+            - '8081:80'
+            - '443:443'
+        volumes:
+            - ./:/var/www
+            - ./docker/nginx/:/etc/nginx/conf.d/
+        restart: always
+        networks:
+            - rede-lara-dash
+        depends_on:
+            - "app"
+    db:
+        user: root
+        container_name: lara-dash-mysql
+        image: mysql:8.4
+        command: --default-authentication-plugin=mysql_native_password --innodb-use-native-aio=0
+        restart: always
+        tty: true
+        volumes:
+            - ./docker/mysql/:/var/lib/mysql
+        environment:
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_DATABASE=nodedb
+        ports:
+            - "3306:3306"
+        networks:
+            - rede-lara-dash
+
+    mailpit:
+        image: axllent/mailpit:latest
+        container_name: mailpit
+        restart: unless-stopped
+        ports:
+        - "1025:1025"
+        - "8025:8025"
+        networks:
+        - rede-lara-dash
+    minio:
+        image: minio/minio
+        container_name: minio
+        restart: unless-stopped
+        environment:
+            MINIO_ROOT_USER: minioadmin
+            MINIO_ROOT_PASSWORD: minioadmin
+        command: server /data
+        ports:
+        - "9000:9000"
+        - "9001:9001"
+        volumes:
+        - minio-data:/data
+        networks:
+        - rede-lara-dash
+networks:
+    rede-lara-dash:
+        driver: bridge
+volumes:
+  minio-data:
+
