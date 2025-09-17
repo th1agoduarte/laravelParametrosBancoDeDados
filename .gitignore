@@ -5,6 +5,8 @@
 /vendor
 .env
 .env.backup
+.env.local
+docker-compose.override.yml
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml
@@ -14,3 +16,5 @@ yarn-error.log
 /.vscode
 /docker/mysql
 /docker/sqlserver
+/.claude
+/public/build
