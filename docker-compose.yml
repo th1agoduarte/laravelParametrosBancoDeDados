@@ -1,96 +1,121 @@
-services:
-    app:
-        container_name: lara-dash-app
-        build:
-            args:
-                user: lara-dash
-                uid: 1000
-            context: ./docker/app
-            dockerfile: Dockerfile.php
-        tty: true
-        working_dir: /var/www/
-        volumes:
-            - ./:/var/www
-        restart: always
-        networks:
-            - rede-lara-dash
-    app-node:
-        container_name: lara-dash-app-node
-        build:
-            context: ./docker/app
-            dockerfile: Dockerfile.node
-        tty: true
-        working_dir: /var/www/
-        volumes:
-            - ./:/var/www
-        restart: always
-        networks:
-            - rede-lara-dash
-        depends_on:
-            - "app"
-    nginx:
-        container_name: lara-dash-nginx
-        image: nginx:latest
-        tty: true
-        ports:
-            - '8081:80'
-            - '443:443'
-        volumes:
-            - ./:/var/www
-            - ./docker/nginx/:/etc/nginx/conf.d/
-        restart: always
-        networks:
-            - rede-lara-dash
-        depends_on:
-            - "app"
-    db:
-        container_name: lara-dash-mysql
-        image: mysql:8.4
-        command: --innodb-use-native-aio=0
-        restart: always
-        tty: true
-        environment:
-            - MYSQL_ROOT_PASSWORD=root
-            - MYSQL_DATABASE=nodedb
-            # - MYSQL_USER=app
-            # - MYSQL_PASSWORD=app123
-        ports:
-            - "3306:3306"
-        volumes:
-            - mysql-data-storage:/var/lib/mysql
-            - ./docker/mysql/init:/docker-entrypoint-initdb.d  # (veja o item 3)
-        networks:
-            - rede-lara-dash
+# Docker Compose file
+# Use ./docker.sh [comando] para executar com UID/GID automáticos
 
-    mailpit:
-        image: axllent/mailpit:latest
-        container_name: mailpit
-        restart: unless-stopped
-        ports:
-        - "1025:1025"
-        - "8025:8025"
-        networks:
-        - rede-lara-dash
-    minio:
-        image: minio/minio
-        container_name: minio
-        restart: unless-stopped
-        environment:
-            MINIO_ROOT_USER: minioadmin
-            MINIO_ROOT_PASSWORD: minioadmin
-        command: server /data
-        ports:
-        - "9000:9000"
-        - "9001:9001"
-        volumes:
-        - minio-data:/data
-        networks:
-        - rede-lara-dash
+x-common-env: &common-env
+  - .env
+  - .env.local
+
+services:
+  app:
+    container_name: app-php
+    build:
+      context: ./docker/app
+      dockerfile: Dockerfile.php
+      args:
+        user: app
+        uid: 1000  # Será sobrescrito pelo docker-compose.override.yml
+        gid: 1000  # Será sobrescrito pelo docker-compose.override.yml
+    user: "1000:1000"  # Será sobrescrito pelo docker-compose.override.yml
+    tty: true
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+    restart: always
+    networks:
+      - rede-app
+    depends_on:
+      - db
+
+  app-node:
+    container_name: app-node
+    build:
+      context: ./docker/app
+      dockerfile: Dockerfile.node
+      args:
+        user: app
+        uid: 1000  # Será sobrescrito pelo docker-compose.override.yml
+        gid: 1000  # Será sobrescrito pelo docker-compose.override.yml
+    user: "1000:1000"  # Será sobrescrito pelo docker-compose.override.yml
+    tty: true
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+    ports:
+      - "5173:5173"
+    environment:
+      - CHOKIDAR_USEPOLLING=true   # ajuda no WSL
+      - VITE_HOST=0.0.0.0          # vite acessível externamente
+    restart: always
+    networks:
+      - rede-app
+    depends_on:
+      - app
+
+  nginx:
+    container_name: app-nginx
+    image: nginx:latest
+    tty: true
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx/:/etc/nginx/conf.d/
+    restart: always
+    networks:
+      - rede-app
+    depends_on:
+      - app
+
+  db:
+    container_name: app-mysql
+    image: mysql:8.4
+    command: --innodb-use-native-aio=0
+    restart: always
+    tty: true
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=nodedb
+      # - MYSQL_USER=app
+      # - MYSQL_PASSWORD=app123
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data-storage:/var/lib/mysql
+      - ./docker/mysql/init:/docker-entrypoint-initdb.d
+    networks:
+      - rede-app
+
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: app-mailpit
+    restart: unless-stopped
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    networks:
+      - rede-app
+
+  minio:
+    image: minio/minio
+    container_name: app-minio
+    restart: unless-stopped
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    command: server /data
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio-data:/data
+    networks:
+      - rede-app
+
 networks:
-    rede-lara-dash:
-        driver: bridge
+  rede-app:
+    driver: bridge
+
 volumes:
   minio-data:
   mysql-data-storage:
-
-

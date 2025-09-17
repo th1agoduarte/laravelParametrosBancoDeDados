@@ -1,0 +1,23 @@
+# Este arquivo deve ser copiado para docker-compose.override.yml
+# e personalizado com seus UID/GID específicos
+#
+# Para obter seus valores:
+# UID: id -u
+# GID: id -g
+
+version: '3.8'
+
+services:
+  app:
+    build:
+      args:
+        uid: 1000  # Substitua pelo resultado de: id -u
+        gid: 1000  # Substitua pelo resultado de: id -g
+    user: "1000:1000"  # Mesmo valores acima
+
+  app-node:
+    build:
+      args:
+        uid: 1000  # Substitua pelo resultado de: id -u
+        gid: 1000  # Substitua pelo resultado de: id -g
+    user: "1000:1000"  # Mesmo valores acima

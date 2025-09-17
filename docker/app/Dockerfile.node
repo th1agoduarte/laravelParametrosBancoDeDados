@@ -1,29 +1,28 @@
 FROM node:20.10.0
 
-# Setting the work directory.
+# Args com defaults (podem ser sobrescritos pelo compose)
+ARG user=app
+ARG uid=1000
+ARG gid=1000
+
 WORKDIR /var/www
 
-# Install system dependencies
+# Dependências
 RUN apt-get update && apt-get install -y \
-    git \
-    curl \
-    libpng-dev \
-    libonig-dev \
-    libxml2-dev \
-    zip \
-    unzip
+    git curl libpng-dev libonig-dev libxml2-dev zip unzip \
+ && apt-get update && apt-get install -y apt-transport-https gnupg2 libzip-dev \
+ && rm -rf /var/lib/apt/lists/*
 
-# Install prerequisites required for tools and extensions installed later on.
-RUN apt-get update \
-    && apt-get install -y apt-transport-https gnupg2 libpng-dev libzip-dev unzip \
-    && rm -rf /var/lib/apt/lists/*
+# Yarn
+RUN curl -fsSL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+ && echo "deb https://dl.yarnpkg.com/debian/ stable main" >/etc/apt/sources.list.d/yarn.list \
+ && apt-get update && apt-get install -y yarn
 
-#install yarn
-RUN curl https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
-    && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
-    && apt-get update && apt-get install yarn -y
+# Grupo/usuário idempotente (tratando conflitos)
+RUN if ! getent group ${gid} >/dev/null 2>&1; then groupadd -g ${gid} ${user}; fi \
+ && if ! id -u ${uid} >/dev/null 2>&1; then \
+      useradd -m -u ${uid} -g ${gid} -s /bin/bash ${user}; \
+    fi \
+ && if id ${user} >/dev/null 2>&1; then usermod -aG www-data ${user}; fi
 
-
-
-
-
+USER ${user}
