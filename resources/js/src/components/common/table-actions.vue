@@ -63,7 +63,7 @@
   </div>
 </template>
 <script setup>
-import {Link,usePage} from "@inertiajs/inertia-vue3";
+import {Link,usePage} from "@inertiajs/vue3";
 import { computed, ref, reactive, onMounted } from "vue";
 import TableProcess from "@/components/common/table-process.vue";
 const props = defineProps({

@@ -60,7 +60,7 @@ import Sidebar from "@/components/layout/sidebar.vue";
 import Footer from "@/components/layout/footer.vue";
 import appSettings from "@/components/app-settings.vue";
 import { computed,onMounted } from "vue";
-import {usePage} from "@inertiajs/inertia-vue3";
+import {usePage} from "@inertiajs/vue3";
 
 import "@/assets/sass/app.scss";
 
@@ -69,7 +69,8 @@ import { useStore } from "vuex";
 const props = defineProps({
   title: { type: String, require: false },
 });
-const app_name = computed(() => usePage().props.value.app_name);
+const page = usePage()
+const app_name = computed(() => (page.props?.value?.app_name ?? page.props?.app_name ?? 'Laravel'))
 useMeta({ title: `${app_name.value} ${props.title ? "| " + props.title : ""}` });
 
 const store = useStore();

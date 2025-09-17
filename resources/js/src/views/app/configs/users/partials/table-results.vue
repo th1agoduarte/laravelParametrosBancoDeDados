@@ -86,7 +86,7 @@
   </div>
 </template>
 <script setup>
-import { Inertia } from "@inertiajs/inertia";
+import { router } from "@inertiajs/vue3";
 import Paginate from "@/components/common/paginate.vue";
 import FormUsersModal from "./form-user-modal.vue";
 import { defineProps, reactive } from "vue";
@@ -133,7 +133,7 @@ const deleteItem = (item) => {
     })
     .then((result) => {
       if (result.value) {
-        Inertia.post(
+        router.post(
           route("app.users.delete"),
           { id: item.id },
           {

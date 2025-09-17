@@ -11,7 +11,7 @@
   </div>
 </template>
 <script setup>
-import { useForm } from "@inertiajs/inertia-vue3";
+import { useForm } from "@inertiajs/vue3";
 import { defineEmits, reactive, onMounted } from "vue";
 import Search from "@/components/common/search.vue";
 const emit = defineEmits(["genarateReportData"]);

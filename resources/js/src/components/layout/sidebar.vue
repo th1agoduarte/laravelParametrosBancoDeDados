@@ -70,7 +70,7 @@
 </template>
 
 <script setup>
-    import {Link,usePage} from "@inertiajs/inertia-vue3";
+    import {Link,usePage} from "@inertiajs/vue3";
     import { onMounted, ref } from 'vue';
     import { useStore } from 'vuex';
     import '@/assets/sass/app.scss';

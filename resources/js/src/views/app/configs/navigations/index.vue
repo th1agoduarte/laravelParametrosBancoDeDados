@@ -10,7 +10,7 @@
   </ContentLayout>
 </template>
 <script setup>
-import { Inertia } from "@inertiajs/inertia";
+import { router } from "@inertiajs/vue3";
 import { computed, ref, reactive, onMounted } from "vue";
 import { useStore } from "vuex";
 import { useMeta } from "@/composables/use-meta";
@@ -54,6 +54,6 @@ const showItemsMenu = (item) => {
 };
 
 const genarateReport = (dataSearch) => {
-  Inertia.get(route("app.navigations.index"), { search: dataSearch },{ replace: true, preserveState: true });
+  router.get(route("app.navigations.index"), { search: dataSearch },{ replace: true, preserveState: true });
 };
 </script>

@@ -95,17 +95,18 @@
 <script setup>
     import '@/assets/sass/authentication/auth.scss';
     import Footer from '@/components/layout/footer.vue';
-    import { Inertia } from "@inertiajs/inertia";
-    import { useForm,usePage } from "@inertiajs/inertia-vue3";
+    import { router } from "@inertiajs/vue3";
+    import { useForm,usePage } from "@inertiajs/vue3";
     import { useMeta } from '@/composables/use-meta';
     import { reactive } from '@vue/reactivity';
     import { onMounted } from '@vue/runtime-core';
     import { computed } from 'vue';
-    const app_name = computed(() => usePage().props.value.app_name);
-    useMeta({ title: `${app_name.value} | Login` });
-    onMounted(() => {
+    const page = usePage()
+    const app_name = computed(() => (page.props?.app_name ?? 'Laravel'))
 
-    });
+    useMeta({
+        title: computed(() => `${app_name.value} | Login`)
+    })
 
     const toggleShowPassword = () => {
         const passwordInput = document.querySelector('#password-field input');

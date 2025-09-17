@@ -1,13 +1,17 @@
-require('./bootstrap');
+import './bootstrap';
 
 import { createApp, h } from 'vue';
-import { createInertiaApp } from '@inertiajs/inertia-vue3';
-import { InertiaProgress } from '@inertiajs/progress';
+import { createInertiaApp } from '@inertiajs/vue3';
+// Temporarily commented out due to import issues with new Inertia versions
+// import { InertiaProgress } from '@inertiajs/progress';
 import store from './store';
 import { formatCPFCNPJ,formatEmail,validateEmail } from './helpers/helpers.js';
 // bootstrap
 import * as bootstrap from 'bootstrap';
 window.bootstrap = bootstrap;
+
+// tema global
+import '@/assets/sass/app.scss'
 
 // modals
 import '@/assets/sass/components/custom-modal.scss';
@@ -25,24 +29,28 @@ import Swal from 'sweetalert2';
 window.Swal = Swal;
 
 // nouislider - later remove and add to page due to not working in page
-import VueNouislider from 'vue3-nouislider';
-import 'vue3-nouislider/dist/vue3-nouislider.css';
+// Temporarily commented out due to Vite build issues with ES modules
+// import VueNouislider from 'vue3-nouislider';
+// import 'vue3-nouislider/dist/vue3-nouislider.css';
 
 // vue input mask
 import Maska from 'maska';
 
 // smooth scroll
-import { registerScrollSpy } from 'vue3-scroll-spy/dist/index';
+// Temporarily commented out due to import issues with Vite
+// import { registerScrollSpy } from 'vue3-scroll-spy/dist/index';
 //registerScrollSpy(app, { offset: 118 });
 
 //vue-i18n
 import i18n from './i18n';
 
 // datatables
-import { ClientTable } from 'v-tables-3';
+// Temporarily commented out due to ES module compatibility issues with Vite
+// import { ClientTable } from 'v-tables-3';
 
 // json to excel
-import vue3JsonExcel from 'vue3-json-excel';
+// Temporarily commented out due to ES module compatibility issues with Vite
+// import vue3JsonExcel from 'vue3-json-excel';
 
 //vue-wizard
 import VueFormWizard from 'vue3-form-wizard';
@@ -56,19 +64,22 @@ window.$appSetting.init();
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
-    resolve: (name) => require(`./views/${name}.vue`),
-    setup({ el, app, props, plugin }){
-        const apps = createApp({ render: () => h(app, props) });
-        registerScrollSpy(apps, { offset: 118 });
+    resolve: (name) => {
+        const pages = import.meta.glob('./views/**/*.vue', { eager: true });
+        return pages[`./views/${name}.vue`];
+    },
+    setup({ el, App, props, plugin }){
+        const apps = createApp({ render: () => h(App, props) });
+        // registerScrollSpy(apps, { offset: 118 }); // Temporarily commented out
         return apps
             .use(plugin)
             .use(store)
             .use(i18n)
             .use(PerfectScrollbar)
-            .use(VueNouislider)
+            // .use(VueNouislider) // Commented out due to Vite build issues
             .use(Maska)
-            .use(ClientTable)
-            .use(vue3JsonExcel)
+            // .use(ClientTable) // Commented out due to ES module issues
+            // .use(vue3JsonExcel) // Commented out due to ES module issues
             .use(VueFormWizard)
             .use(head)
             .mixin({
@@ -80,4 +91,4 @@ createInertiaApp({
     },
 });
 
-InertiaProgress.init({ color: '#4B5563' });
+// InertiaProgress.init({ color: '#4B5563' }); // Commented out temporarily

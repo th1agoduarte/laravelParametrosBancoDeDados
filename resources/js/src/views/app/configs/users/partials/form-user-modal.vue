@@ -103,7 +103,7 @@
   </div>
 </template>
 <script setup>
-import { useForm } from "@inertiajs/inertia-vue3";
+import { useForm } from "@inertiajs/vue3";
 import { reactive, defineEmits, onMounted } from "vue";
 
 import "@/assets/sass/components/custom-sweetalert.scss";

@@ -16,9 +16,9 @@
 <script setup>
 import AppLayout from "@/layouts/app-layout.vue";
 import Breadcrumb from "@/components/layout/breadcrumb.vue";
-import { Inertia } from "@inertiajs/inertia";
+import { router } from "@inertiajs/vue3";
 import { computed, ref, reactive, onMounted } from "vue";
-import { usePage } from "@inertiajs/inertia-vue3";
+import { usePage } from "@inertiajs/vue3";
 import "@/assets/sass/widgets/widgets.scss";
 const name = "content layout";
 const props = defineProps({
@@ -28,11 +28,11 @@ const props = defineProps({
 });
 
 onMounted(() => {
-  if (usePage().props.value.flash.permissionErro) {
+  if (usePage().props.flash.permissionErro) {
     new window.Swal({
       icon: "warning",
       title: "Permissions",
-      text: usePage().props.value.flash.permissionErro,
+      text: usePage().props.flash.permissionErro,
       padding: "2em",
     });
   }

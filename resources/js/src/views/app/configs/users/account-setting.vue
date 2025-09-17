@@ -64,8 +64,8 @@
     import '@/assets/sass/scrollspyNav.scss';
     import '@/assets/sass/users/account-setting.scss';
     import { useMeta } from '@/composables/use-meta';
-    import { Inertia } from "@inertiajs/inertia";
-    import { useForm } from "@inertiajs/inertia-vue3";
+    import { router } from "@inertiajs/vue3";
+    import { useForm } from "@inertiajs/vue3";
     import {  reactive, onMounted,defineProps } from "vue";
     const props = defineProps({
         user: { type: Object, require: true, default: {} },

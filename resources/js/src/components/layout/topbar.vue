@@ -62,6 +62,6 @@
     </div>
 </template>
 <script setup>
-import {Link,usePage} from "@inertiajs/inertia-vue3";
+import {Link,usePage} from "@inertiajs/vue3";
 const name ="Topbar"
 </script>

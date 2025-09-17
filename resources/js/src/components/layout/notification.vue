@@ -14,8 +14,9 @@
 </template>
 <script setup>
 import { computed } from "vue";
-import { Link, usePage } from "@inertiajs/inertia-vue3";
-const year = computed(() => usePage().props.value.year);
-const version = computed(() => usePage().props.value.version);
-const app_name = computed(() => usePage().props.value.app_name);
+import { Link, usePage } from "@inertiajs/vue3";
+const year = computed(() => usePage().props?.year);
+const version = computed(() => usePage().props?.version);
+const page = usePage()
+const app_name = computed(() => (page.props?.value?.app_name ?? page.props?.app_name ?? 'Laravel'))
 </script>

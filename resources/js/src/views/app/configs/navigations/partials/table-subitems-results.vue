@@ -71,7 +71,7 @@
   </div>
 </template>
 <script setup>
-import { Inertia } from '@inertiajs/inertia';
+import { router } from '@inertiajs/vue3';
 import Paginate from "@/components/common/paginate.vue";
 import FormSubitemModal from "./form-subitem-modal.vue";
 import { defineProps, reactive,defineEmits } from "vue";
@@ -139,7 +139,7 @@ const deleteItem = (item) => {
     })
     .then((result) => {
       if (result.value) {
-        Inertia.post(
+        router.post(
           route("app.navigations.subitem.delete"),
           { id: item.id_update },
           {
