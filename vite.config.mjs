@@ -46,8 +46,8 @@ export default defineConfig({
         },
     },
     build: {
-        sourcemap: true,     // ajuda a depurar
-        minify: false,
+        sourcemap: false,     // ajuda a depurar
+        minify: true,         // minimiza o código para produção
         chunkSizeWarningLimit: 1000,
         emptyOutDir: false,
         rollupOptions: {
@@ -74,8 +74,8 @@ export default defineConfig({
         include: ['lodash', 'nouislider'],
     },
     esbuild: {
-        minifyIdentifiers: false, // evita renomear identificadores
-        keepNames: true
+        minifyIdentifiers: true, // evita renomear identificadores
+        keepNames: false, // não mantém nomes de funções e classes
     },
     server: {
         host: '0.0.0.0',
