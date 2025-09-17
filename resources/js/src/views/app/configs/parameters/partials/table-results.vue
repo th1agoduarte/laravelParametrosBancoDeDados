@@ -19,25 +19,25 @@
         </button>
       </div>
       <div class="widget-content table-responsive">
-        <table class="table">
+        <table class="table table-hover">
           <thead>
             <tr>
-              <th class="text-center">ID</th>
-              <th class="text-left">Parameter</th>
-              <th class="text-left">Description</th>
-              <th class="text-left">Comment</th>
-              <th class="text-left">Value</th>
-              <th class="text-center">Actions</th>
+              <th class="text-center"><div class="th-content">ID</div></th>
+              <th class="text-left"><div class="th-content">Parameter</div></th>
+              <th class="text-left"><div class="th-content">Description</div></th>
+              <th class="text-left"><div class="th-content">Comment</div></th>
+              <th class="text-left"><div class="th-content">Value</div></th>
+              <th class="text-center"><div class="th-content">Actions</div></th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="item in props.dataReport.data" :key="item.id">
-              <td class="text-center">{{ item.id }}</td>
-              <td class="text-left">{{ item.parameter }}</td>
-              <td class="text-left">{{ item.description }}</td>
-              <td class="text-left">{{ item.comment }}</td>
-              <td class="text-left" v-if="item.type_secret == 'N'">{{ item.value }}</td>
-              <td class="text-left" v-else> *** </td>
+              <td class="text-center"><div class="td-content">{{ item.id }}</div></td>
+              <td class="text-left"><div class="td-content">{{ item.parameter }}</div></td>
+              <td class="text-left"><div class="td-content">{{ item.description }}</div></td>
+              <td class="text-left"><div class="td-content">{{ item.comment }}</div></td>
+              <td class="text-left" v-if="item.type_secret == 'N'"><div class="td-content">{{ item.value }}</div></td>
+              <td class="text-left" v-else><div class="td-content"> *** </div></td>
               <td class="text-center">
                 <button
                   type="button"

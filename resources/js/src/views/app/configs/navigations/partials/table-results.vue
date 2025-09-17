@@ -28,22 +28,22 @@
         </button>
       </div>
       <div class="widget-content table-responsive">
-        <table class="table">
+        <table class="table table-hover">
           <thead>
             <tr>
-              <th class="text-center">ID</th>
-              <th class="text-left">Description</th>
-              <th class="text-left">Route</th>
-              <th class="text-left">Icon</th>
-              <th class="text-center" style="min-width:150px;">Actions</th>
+              <th class="text-center"><div class="th-content">ID</div></th>
+              <th class="text-left"><div class="th-content">Description</div></th>
+              <th class="text-left"><div class="th-content">Route</div></th>
+              <th class="text-left"><div class="th-content">Icon</div></th>
+              <th class="text-center" style="min-width:150px;"><div class="th-content">Actions</div></th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="item in props.dataReport.data" :key="item.id">
-              <td class="text-center">{{ item.id_update }}</td>
-              <td class="text-left">{{ item.name }}</td>
-              <td class="text-left">{{ item.route }}</td>
-              <td class="text-center"><i :class="item.icon" style="font-size: 17px;margin-right: 14px;"></i></td>
+              <td class="text-center"><div class="td-content">{{ item.id_update }}</div></td>
+              <td class="text-left"><div class="td-content">{{ item.name }}</div></td>
+              <td class="text-left"><div class="td-content">{{ item.route }}</div></td>
+              <td class="text-center"><div class="td-content"><i :class="item.icon" style="font-size: 17px;margin-right: 14px;"></i></div></td>
               <td class="text-center">
                 <!-- <button
                   type="button"

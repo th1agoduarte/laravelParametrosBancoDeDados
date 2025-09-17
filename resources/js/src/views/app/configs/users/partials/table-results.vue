@@ -19,35 +19,37 @@
         </button>
       </div>
       <div class="widget-content table-responsive">
-        <table class="table">
+        <table class="table table-hover">
           <thead>
             <tr>
-              <th class="text-center">Avatar</th>
-              <th class="text-center">ID</th>
-              <th class="text-left">User</th>
-              <th class="text-left">Email</th>
-              <th class="text-center">Actions</th>
+              <th class="text-center"><div class="th-content">Avatar</div></th>
+              <th class="text-center"><div class="th-content">ID</div></th>
+              <th class="text-left"><div class="th-content">User</div></th>
+              <th class="text-left"><div class="th-content">Email</div></th>
+              <th class="text-center"><div class="th-content">Actions</div></th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="item in props.dataReport.data" :key="item.id">
               <td class="text-center">
-                <img
-                  v-if="item.photo && item.photo !== '/storage/'"
-                  :src="item.photo"
-                  alt="profile"
-                  class="profile-preview"
-                />
-                <img
-                  v-else
-                  :src="`https://ui-avatars.com/api/?name=${item.name}&color=7F9CF5&background=EBF4FF`"
-                  alt="profile"
-                  class="profile-preview"
-                />
+                <div class="td-content">
+                  <img
+                    v-if="item.photo && item.photo !== '/storage/'"
+                    :src="item.photo"
+                    alt="profile"
+                    class="profile-preview"
+                  />
+                  <img
+                    v-else
+                    :src="`https://ui-avatars.com/api/?name=${item.name}&color=7F9CF5&background=EBF4FF`"
+                    alt="profile"
+                    class="profile-preview"
+                  />
+                </div>
               </td>
-              <td class="text-center">{{ item.id }}</td>
-              <td class="text-left">{{ item.name }}</td>
-              <td class="text-left">{{ item.email }}</td>
+              <td class="text-center"><div class="td-content">{{ item.id }}</div></td>
+              <td class="text-left"><div class="td-content">{{ item.name }}</div></td>
+              <td class="text-left"><div class="td-content">{{ item.email }}</div></td>
               <td class="text-center">
                 <button
                   type="button"
