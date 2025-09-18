@@ -1,5 +1,5 @@
-// import qs from 'qs'
+import qs from 'qs'
 
-// export const stringify = qs.stringify
-// export const parse = qs.parse
-// export default qs
+export const stringify = qs.stringify
+export const parse = qs.parse
+export default qs
